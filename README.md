@@ -205,9 +205,9 @@ This project is licensed under the **MIT License** - see the [LICENSE](LICENSE) 
 
 ## 🆘 Support
 
-- **Issues**: [GitHub Issues](https://github.com/your-username/appwave-gate/issues)
-- **Documentation**: [Wiki](https://github.com/your-username/appwave-gate/wiki)
-- **Email**: support@appwave.com
+- **Issues**: [GitHub Issues](https://github.com/appwave-cloud/appwave-gate/issues)
+- **Documentation**: [Wiki](https://github.com/appwave-cloud/appwave-gate/wiki)
+- **Email**: hello@appwave.cloud
 
 ## 🙏 Acknowledgments
 
