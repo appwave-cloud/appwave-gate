@@ -1,29 +1,221 @@
-# Create T3 App
+# �� AppWave Gate
 
-This is a [T3 Stack](https://create.t3.gg/) project bootstrapped with `create-t3-app`.
+> **A modern platform for managing OpnSense Firewalls**
 
-## What's next? How do I make an app with this?
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+[![Next.js](https://img.shields.io/badge/Next.js-15.2.3-black)](https://nextjs.org/)
+[![TypeScript](https://img.shields.io/badge/TypeScript-5.8.2-blue)](https://www.typescriptlang.org/)
+[![Prisma](https://img.shields.io/badge/Prisma-6.5.0-2D3748)](https://www.prisma.io/)
 
-We try to keep this project as simple as possible, so you can start with just the scaffolding we set up for you, and add additional things later when they become necessary.
+## 📋 Overview
 
-If you are not familiar with the different technologies used in this project, please refer to the respective docs. If you still are in the wind, please join our [Discord](https://t3.gg/discord) and ask for help.
+AppWave Gate is a modern web platform that enables centralized management of OpnSense Firewalls. The platform provides an intuitive user interface for managing certificates, OpenVPN profiles, and firewall configurations.
 
-- [Next.js](https://nextjs.org)
-- [NextAuth.js](https://next-auth.js.org)
-- [Prisma](https://prisma.io)
-- [Drizzle](https://orm.drizzle.team)
-- [Tailwind CSS](https://tailwindcss.com)
-- [tRPC](https://trpc.io)
+## ✨ Features
 
-## Learn More
+### 🔒 Certificate Management
+- **Creation and management of SSL/TLS certificates**
+- **Automatic certificate generation** for OpenVPN profiles
+- **Centralized certificate management** for all connected firewalls
 
-To learn more about the [T3 Stack](https://create.t3.gg/), take a look at the following resources:
+### 🌐 OpenVPN Profiles
+- **Creation of OpenVPN client profiles**
+- **Automatic integration of client certificates**
+- **Export functionality** for ready-to-use OpenVPN configuration files
+- **Secure authentication** with certificates
 
-- [Documentation](https://create.t3.gg/)
-- [Learn the T3 Stack](https://create.t3.gg/en/faq#what-learning-resources-are-currently-available) — Check out these awesome tutorials
+### 🛡️ Firewall Management
+- **Centralized management** of multiple OpnSense firewalls
+- **Status monitoring** and connection testing
+- **API integration** with OpnSense REST API
+- **User-friendly interface** for firewall configurations
 
-You can check out the [create-t3-app GitHub repository](https://github.com/t3-oss/create-t3-app) — your feedback and contributions are welcome!
+### 🔐 Authentication & Security
+- **Modern authentication** with Better-Auth
+- **Secure API communication** with OpnSense firewalls
+- **Session management** and user administration
 
-## How do I deploy this?
+## 🛠️ Tech Stack
 
-Follow our deployment guides for [Vercel](https://create.t3.gg/en/deployment/vercel), [Netlify](https://create.t3.gg/en/deployment/netlify) and [Docker](https://create.t3.gg/en/deployment/docker) for more information.
+### Frontend
+- **Next.js 15** - React Framework with App Router
+- **TypeScript** - Type-safe development
+- **Tailwind CSS** - Utility-first CSS Framework
+- **Shadcn/ui** - Modern UI components
+- **Lucide React** - Beautiful icons
+
+### Backend & API
+- **tRPC** - End-to-end type-safe APIs
+- **Prisma** - Modern database ORM
+- **Better-Auth** - Authentication solution
+- **Zod** - Schema validation
+
+### Database
+- **PostgreSQL** - Robust relational database
+- **Prisma Migrations** - Database schema management
+
+### Development Tools
+- **Biome** - Linter and formatter
+- **pnpm** - Fast package manager
+
+## 🚀 Installation
+
+### Prerequisites
+
+- **Node.js** (Version 18 or higher)
+- **pnpm** (Package manager)
+- **PostgreSQL** database
+- **Docker** (optional, for local development)
+
+### 1. Clone repository
+
+```bash
+git clone https://github.com/your-username/appwave-gate.git
+cd appwave-gate
+```
+
+### 2. Install dependencies
+
+```bash
+pnpm install
+```
+
+### 3. Configure environment variables
+
+Create a `.env` file based on `.env.example`:
+
+```bash
+cp .env.example .env
+```
+
+Fill in the required environment variables:
+
+```env
+# Database
+DATABASE_URL="postgresql://username:password@localhost:5432/appwave_gate"
+
+# Authentication
+BETTER_AUTH_SECRET="your-secret-key-here"
+
+# Environment
+NODE_ENV="development"
+```
+
+### 4. Set up database
+
+#### Option A: With Docker (recommended)
+
+```bash
+# Start database container
+./start-database.sh
+
+# Run database migrations
+pnpm db:generate
+```
+
+#### Option B: Local PostgreSQL installation
+
+```bash
+# Run database migrations
+pnpm db:generate
+```
+
+### 5. Start development server
+
+```bash
+pnpm dev
+```
+
+The application is now available at `http://localhost:3000`.
+
+## 📁 Project Structure
+
+```
+appwave-gate/
+├── src/
+│   ├── app/                    # Next.js App Router
+│   │   ├── api/               # API Routes
+│   │   │   ├── auth/          # Authentication
+│   │   │   └── trpc/          # tRPC API
+│   │   └── firewalls/         # Firewall Management
+│   ├── components/            # React Components
+│   │   ├── ui/               # Shadcn/ui Components
+│   │   └── sidebar/          # Sidebar Navigation
+│   ├── lib/                  # Utility Functions
+│   ├── server/               # Server-side Logic
+│   │   ├── api/             # tRPC Routers
+│   │   └── opnsense-api.ts  # OpnSense API Client
+│   └── trpc/                # tRPC Configuration
+├── prisma/                  # Database Schema
+├── public/                  # Static Assets
+└── styles/                  # Global Styles
+```
+
+## 🔧 Available Scripts
+
+```bash
+# Development
+pnpm dev              # Start development server
+pnpm build            # Create production build
+pnpm start            # Start production server
+pnpm preview          # Preview build
+
+# Database
+pnpm db:generate      # Generate Prisma client
+pnpm db:migrate       # Run migrations
+pnpm db:push          # Push schema to database
+pnpm db:studio        # Open Prisma Studio
+
+# Code Quality
+pnpm check            # Check code with Biome
+pnpm check:write      # Auto-format code
+pnpm typecheck        # Check TypeScript types
+```
+
+## 🔌 OpnSense Integration
+
+AppWave Gate communicates with your firewalls via the OpnSense REST API. Make sure that:
+
+1. **API access is enabled** in your OpnSense installation
+2. **API key** and **API secret** are correctly configured
+3. **HTTPS** is used for secure communication
+
+### API Configuration in OpnSense
+
+1. Go to **System > Access > Users**
+2. Create a new API user
+3. Enable **API access** for the user
+4. Note down the **API key** and **API secret**
+
+## 🤝 Contributing
+
+We welcome contributions! Please read our [Contributing Guidelines](CONTRIBUTING.md) for details.
+
+### Setting up development environment
+
+1. Fork the repository
+2. Create a feature branch: `git checkout -b feature/amazing-feature`
+3. Commit your changes: `git commit -m 'Add amazing feature'`
+4. Push to the branch: `git push origin feature/amazing-feature`
+5. Open a Pull Request
+
+## 📄 License
+
+This project is licensed under the **MIT License** - see the [LICENSE](LICENSE) file for details.
+
+## 🆘 Support
+
+- **Issues**: [GitHub Issues](https://github.com/your-username/appwave-gate/issues)
+- **Documentation**: [Wiki](https://github.com/your-username/appwave-gate/wiki)
+- **Email**: support@appwave.com
+
+## 🙏 Acknowledgments
+
+- **OpnSense** - For the excellent firewall software
+- **Shadcn/ui** - For the beautiful UI components
+- **tRPC** - For type-safe APIs
+- **Vercel** - For the Next.js framework
+
+---
+
+**Built with ❤️ by AppWave**
